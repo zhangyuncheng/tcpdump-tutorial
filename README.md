@@ -32,10 +32,59 @@ tcpdump 是世界上首屈一指的网络分析工具，将强大的功能和简
 -x：用十六进制字码列出数据包资料；  
 -w：<数据包文件>：把数据包数据写入指定的文件。  
 
-## 浏览隔离示例
+## 流量过滤示例
 
-查看网卡上的网络流量
+### 查看网卡上的网络流量
 
 ```bash
 tcpdump -i eth0
+```
+
+### 过滤特定 IP
+
+```bash
+tcpdump ip host 192.168.1.1
+```
+
+### 过滤来源或目的IP地址
+
+方向为 src 和 dst  
+
+```bash
+tcpdump src 192.168.1.1
+```
+
+### 按网络查找数据包
+
+```bash
+tcpdump net 192.168.1.0/24
+```
+
+### 协议过滤
+
+ICMP IGMP IGRP IP IP6 TCP UDP RIP RARP SCCP
+
+```bash
+tcpdump icmp
+```
+
+### 特定端口过滤
+
+```bash
+tcpdump port 80
+tcpdump port 80-85
+tcpdump dst port 80
+```
+
+### 数据包大小过滤
+
+```bash
+tcpdump 'len > 32 and len < 64'
+```
+
+### 读取/写入到文件
+
+```bash
+tcpdump -w output.pcap -i eth0
+tcpdump -r input.pcap
 ```
